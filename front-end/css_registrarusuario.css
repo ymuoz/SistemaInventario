@@ -49,6 +49,7 @@
     color: #014670;
     margin: 16px 0;
     font-size: 16px;
+    outline: none;
   }
   
   .form-register .botons:hover, input:hover {
