@@ -18,7 +18,7 @@ html,body {
 	margin: auto;
 	width: 800px;
 	height: 400px;
-	box-shadow: 4px 4px 4px #014670;
+	box-shadow: 4px 4px 20px #014670;
 }
 
 .login {
@@ -26,6 +26,7 @@ html,body {
 	width: 300px;
 	background-color: #eaeaea;
 	text-align: center;
+	
 }
 .titulo h1{
 	margin-top: 50px;
