@@ -45,3 +45,21 @@ html,body {
 	color: #014670;
 
 }
+
+.formulario boton {
+	padding: 0;
+	font-size: 15px;
+	background-color: white;
+}
+
+.formulario boton:hover, input:hover {
+	box-shadow: 3px 3px 3px rgba(1,70,112,.5);
+}
+
+.formulario a {
+	display: block;
+	font-size: 13px; 
+	text-align: right;
+	margin: 10px 32px;
+	color: #014670;
+}
