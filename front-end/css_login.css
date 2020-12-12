@@ -63,3 +63,28 @@ html,body {
 	margin: 10px 32px;
 	color: #014670;
 }
+
+.segundo_apartado {
+	display: flex;
+	order: 2;
+	flex-grow: 2;
+	background-image: url(bg2.jpg);
+	background-size: cover;
+	background-position: center;
+	text-align: center;
+	color: #eee;
+}
+
+.segundo_apartado span {
+	margin: auto;
+}
+
+.segundo_apartado span p {
+	font-size: 15px;
+}
+
+.segundo_apartado  span img {
+
+	width: 200px;
+	 height: 200px;
+}
