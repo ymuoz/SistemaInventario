@@ -40,6 +40,20 @@
     font-size: 18px;
     color: #014670;
   }
+
+  .form-register select{
+    box-sizing: border-box;
+      outline: none;
+    width: 100%;
+    background: white;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid #014670;
+    font-family: 'calibri';
+    font-size: 18px;
+    color: #014670;
+  }
   
   .form-register .botons {
     width: 100%;
@@ -52,6 +66,6 @@
     outline: none;
   }
   
-  .form-register .botons:hover, input:hover {
+  .form-register .botons:hover, input:hover, select:hover {
       box-shadow: 3px 3px 3px rgba(1,70,112,.5);
   }
