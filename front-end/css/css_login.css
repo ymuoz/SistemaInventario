@@ -35,7 +35,7 @@ html,body {
 	font-size: 35px;
 }
 .titulo h3{
-	margin-top: 25px;
+	margin-top: 22px;
 	margin-bottom: 30px;
 	color: #014670;
 	font-size: 30px;
@@ -100,7 +100,7 @@ html,body {
 	display: flex;
 	margin: auto;
 	margin-top: 100px;
-	margin-left: 400px;
+	margin-left: 260px;
 	width: 600px;
 	height: 500px;
 	box-shadow: 4px 4px 4px #014670;
@@ -116,7 +116,7 @@ html,body {
 .containermenu {
 	display: flex;
 	margin-top: 5px;
-	margin: left 1px;
+	margin-left: 10px;
 	width: 1340px;
 	height: 55px;
 	background-color: #eaeaea;
