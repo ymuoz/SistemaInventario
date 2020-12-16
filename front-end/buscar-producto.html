@@ -3,8 +3,8 @@
 <head>
     <title>Buscar Producto</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/css_login.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/css_login.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -17,7 +17,7 @@
                     <h3>BUSCAR PRODUCTO</h3>
                 </div>
 
-                <form class="buscar" method="get" action="https://www.google.com/">
+                <form class="buscar" method="get" action="{{ url_for('home') }}">
                     <div class="jumbotron">
                         <div class="form-group">
                             <div>
@@ -31,7 +31,7 @@
                                     <div class="container-fluid">
                                         <div class="card border-primary mb-3" style="max-width: 20rem;">
                                             <div class="card-body">
-                                                <img src="img/zapatos.jpeg" alt="" class="img-thumbnail">
+                                                <img src="{{ url_for('static', filename='img/zapatos.jpeg')}}" alt="" class="img-thumbnail">
                                                 <b>Zapatos</b>
                                                 <br />
                                                 $300.000
@@ -47,7 +47,7 @@
                                     <div class="container-fluid">
                                         <div class="card border-primary mb-3" style="max-width: 20rem;">
                                             <div class="card-body">
-                                                <img src="img/botas_mujer.jpeg" alt="" class="img-thumbnail">
+                                                <img src="{{ url_for('static', filename='img/botas_mujer.jpeg')}}" alt="" class="img-thumbnail">
                                                 <b>Botas</b>
                                                 <br />
                                                 $500.000
@@ -63,7 +63,7 @@
                                     <div class="container-fluid">
                                         <div class="card border-primary mb-3" style="max-width: 20rem;">
                                             <div class="card-body">
-                                                <img src="img/laptop.jpg" alt="" class="img-thumbnail">
+                                                <img src="{{ url_for('static', filename='img/laptop.jpg')}}" alt="" class="img-thumbnail">
                                                 <b>Laptop</b>
                                                 <br />
                                                 $1.500.000
@@ -79,7 +79,7 @@
                                     <div class="container-fluid">
                                         <div class="card border-primary mb-3" style="max-width: 20rem;">
                                             <div class="card-body">
-                                                <img src="img/gafas1.jpg" alt="" class="img-thumbnail">
+                                                <img src="{{ url_for('static', filename='img/gafas1.jpg')}}" alt="" class="img-thumbnail">
                                                 <b>Gafas de Seguridad</b>
                                                 <br />
                                                 $100.000
