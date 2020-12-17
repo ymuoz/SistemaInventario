@@ -12,8 +12,11 @@
 </head>
 
 <body>
-    <form class="form-register" method="post" action="{{ url_for('home') }}" onSubmit="return validar_formulario()" id="formulario">
+    <form class="form-register" method="post" action="{{ url_for('crearproducto') }}" onSubmit="return validar_formulario()" id="formulario">
         <h4>Nuevo Producto</h4>
+        {% if error %}
+    		<p class=error><strong>Error:</strong> {{ error }}
+  	    {% endif %}
         <input class="controls" type="text" name="nombre" id="nombre" placeholder="Nombre del producto">
         <input class="controls" type="text" name="ref" id="ref" placeholder="Referencia">
         <input class="controls" type="text" name="cantidad" id="cantidad" placeholder="Cantidad">
@@ -21,7 +24,7 @@
         <input class="controls" type="text" name="imagen" id="imagen" placeholder="">
         Agregar imagen
         <input type="file">
-        <input class="botons" name = "guardar" type="submit" value="guardar">
+        <input class="botons" name = "guardar" type="submit" value="guardar" >
         <input class="botons" name = "cancelar" type="submit" value="cancelar">
     </form>
 </body>

@@ -21,7 +21,19 @@ def login():
 
 @app.route("/crearproducto", methods=['GET', 'POST'])
 def crearproducto():
-    return render_template('crear-producto.html')
+    error = None
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        ref = request.form['ref']
+        cantidad = request.form['cantidad']
+        precio = request.form['precio']
+
+        if nombre == '' or ref == '' or cantidad == '' or precio=='':
+            error = 'datos no válidos.'
+        else:
+            return redirect(url_for('home'))
+
+    return render_template('crear-producto.html', error=error)
 
 @app.route("/modificarproducto", methods=['GET', 'POST'])
 def modificarproducto():
