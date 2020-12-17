@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, url_for
+from flask import render_template
 
 app = Flask(__name__, template_folder="front-end")
 
@@ -9,7 +9,7 @@ def home():
 
 @app.route("/login")
 def login():    
-    return render_template('login-adm.html')
+    return render_template('login_adm.html')
 
 @app.route("/crearproducto")
 def crearproducto():
