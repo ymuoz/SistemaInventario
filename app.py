@@ -1,5 +1,4 @@
-from flask import Flask
-from flask import render_template
+from flask import Flask, request, render_template, redirect, url_for
 
 app = Flask(__name__, template_folder="front-end")
 
@@ -7,31 +6,40 @@ app = Flask(__name__, template_folder="front-end")
 def home():
     return render_template('menu-general.html')
 
-@app.route("/login")
-def login():    
-    return render_template('login_adm.html')
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        username = request.form['userid']
+        password = request.form['password']
+        if username != 'admin' or password != 'secret':
+            error = 'usuario y/o password inválidos.'
+        else:
+            return redirect(url_for('home'))
 
-@app.route("/crearproducto")
+    return render_template('login_adm.html', error=error)
+
+@app.route("/crearproducto", methods=['GET', 'POST'])
 def crearproducto():
     return render_template('crear-producto.html')
 
-@app.route("/modificarproducto")
+@app.route("/modificarproducto", methods=['GET', 'POST'])
 def modificarproducto():
     return render_template('crear-producto.html')
 
-@app.route("/eliminarproducto")
+@app.route("/eliminarproducto", methods=['GET', 'POST'])
 def eliminarproducto():
     return render_template('crear-producto.html')
 
-@app.route("/registrarusuario")
+@app.route("/registrarusuario", methods=['GET', 'POST'])
 def registrarusuario():
     return render_template('registrar_usuario.html')
 
-@app.route("/actualizarinventario")
+@app.route("/actualizarinventario", methods=['GET', 'POST'])
 def actualizarinventario():
     return render_template('actualizar-inventario.html')
 
-@app.route("/buscarproducto")
+@app.route("/buscarproducto", methods=['GET', 'POST'])
 def buscarproducto():
     return render_template('buscar-producto.html')
 
