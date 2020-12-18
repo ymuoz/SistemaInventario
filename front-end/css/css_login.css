@@ -99,8 +99,8 @@ html,body {
 .container2 {
 	display: flex;
 	margin: auto;
-	margin-top: 100px;
-	margin-left: 260px;
+	margin-top: 60px;
+	margin-left: 390px;
 	width: 600px;
 	height: 500px;
 	box-shadow: 4px 4px 4px #014670;
@@ -114,7 +114,7 @@ html,body {
 }
 
 .containermenu {
-	display: flex;
+	
 	margin-top: 5px;
 	margin-left: 10px;
 	width: 1340px;
