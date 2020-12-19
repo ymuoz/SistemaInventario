@@ -9,11 +9,37 @@
     </head>
     <body>
         <div class="containermenu">
-            <div class="btn-group-horizontal" role="group" aria-label="Basic outlined example">
-                <button style="margin-top: 10px; margin-left: 10px;" type="button" class="btn btn-primary">HOME</button>
-                <button style="margin-top: 10px; margin-left: 10px;" type="button" class="btn btn-primary">LOGIN</button>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="menu-general.html">Sistema de Inventario</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
+                    aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
         
-            </div>   
+                <div class="collapse navbar-collapse" id="navbarColor03">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="crear-producto.html">Crear Producto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="adicionar.html">Editar Producto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="adicionar.html">Eliminar Producto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="buscar-producto.html">Buscar Producto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="registrar_usuario.html">Registrar Usuario</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Salir</a>
+                        </li>
+                    </ul>
+                    Administardor
+                </div>
+            </nav>   
         
             <div class="container2">
                 <div class="adicionar">
@@ -22,6 +48,7 @@
                     </div>
                     
                     <form class="cuadrotexto" method="get" action="https://www.google.com/">
+                            <input type="file" name="carga">
                             <img ALIGN=left style="border: 2px solid; color: black;" src="img/imagenPd.png"  class="imagenproductoAd" alt="Norway"  >
                             
                             <br> <br> 
@@ -32,8 +59,8 @@
                             <P  ALIGN=left ><b>Valor:<br>  </b> <INPUT  type="number" name=valor>
                             <P  ALIGN=left ><b>Cantidad:<br>  </b> <INPUT  type="number" name=cantidad>
                             <br><br>
-                            <input  class="boton" type="submit" value="Actualizar">
-                            <input  class="boton" type="submit" value="Eliminar producto">
+                            <input  class="boton" type="submit" value=" Actualizar ">
+                            <input  class="boton" type="submit" value=" Eliminar producto ">
                             
                         </form>
                 </div>
