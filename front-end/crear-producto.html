@@ -5,22 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="esp-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/css_registrarusuario.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/css_registrarusuario.css')}}">
+    <script src="{{ url_for('static', filename='js/crear-producto-validacion.js') }}"></script>
+
     <title>Nuevo Producto</title>
 </head>
 
 <body>
-    <form class="form-register" method="get" action="login_adm.html">
+    <form class="form-register" method="post" action="{{ url_for('crearproducto') }}" onSubmit="return validar_formulario()" id="formulario">
         <h4>Nuevo Producto</h4>
-        <input class="controls" type="text" name="nombres" id="nombres" placeholder="Nombre del producto">
+        {% if error %}
+    		<p class=error><strong>Error:</strong> {{ error }}
+  	    {% endif %}
+        <input class="controls" type="text" name="nombre" id="nombre" placeholder="Nombre del producto">
         <input class="controls" type="text" name="ref" id="ref" placeholder="Referencia">
         <input class="controls" type="text" name="cantidad" id="cantidad" placeholder="Cantidad">
         <input class="controls" type="text" name="precio" id="precio" placeholder="Precio">
-        <input class="controls" type="text" name="precio" id="precio" placeholder="Precio">
+        <input class="controls" type="text" name="imagen" id="imagen" placeholder="">
         Agregar imagen
         <input type="file">
-        <input class="botons" type="submit" value="Guardar">
-        <input class="botons" type="submit" value="Cancelar">
+        <input class="botons" name = "guardar" type="submit" value="Guardar" >
+        <input class="botons submit-button" name = "cancelar" type = "button" onclick="location.href = '{{ url_for('home') }}';" value="Cancelar">
     </form>
 </body>
 

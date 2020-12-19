@@ -5,20 +5,33 @@
 	<meta charset="UTF-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
   	<meta http-equiv="esp-Compatible" content="ie=edge">
-	<link rel="stylesheet" type="text/css" href="css/css_login.css">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/css_login.css')}}">
+	<script src="{{ url_for('static', filename='js/login-validation.js') }}"></script>
 </head>
 <body>
 <div class="container">
 	<div class="login">
+	{% with messages = get_flashed_messages() %}
+  		{% if messages %}
+    		<ul class=flashes>
+    		{% for message in messages %}
+     	 		<li>{{ message }}</li>
+    		{% endfor %}
+    		</ul>
+  		{% endif %}
+	{% endwith %}
 		<div class = "titulo">
 			<h1>Autenticar Usuario</h1>
+			{% if error %}
+    		<p class=error><strong>Error:</strong> {{ error }}
+  			{% endif %}
         </div>
         
-        <form class="formulario" method="post" action="registrar_usuario.html">
+        <form class="formulario" method="post" action="{{ url_for('login') }}" onSubmit="return validar_formulario()" id="formulario">
             
-				<input type="text" placeholder="nombre del usuario">
+				<input type="text" placeholder="nombre del usuario" id="userid" name = 'userid'>
 				<br>
-				<input type="password" placeholder="contraseña del usuario">
+				<input type="password" placeholder="contraseña del usuario" id="password" name = 'password'>
 				<br>
 				<a href="recuperar-clave.html">¿Has olvidado tu contraseña?</a>
 				<br>
@@ -28,7 +41,7 @@
     <div class="segundo_apartado">
 		<span>
 			<h1>bienvenido</h1>
-			<img src="img/imagen.png">
+			<img src="{{ url_for('static', filename='img/imagen.png')}}">
 		</span>
 	</div>
 </div>

@@ -3,7 +3,7 @@
 <head>
     <title>Buscar Producto</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
 </head>
 
 <body>
@@ -17,29 +17,29 @@
         <div class="collapse navbar-collapse" id="navbarColor03">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="crear-producto.html">Crear Producto</a>
+                    <a class="nav-link" href="{{ url_for('crearproducto') }}">Crear Producto</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="adicionar.html">Editar Producto</a>
+                    <a class="nav-link" href="{{ url_for('modificarproducto') }}">Editar Producto</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="adicionar.html">Eliminar Producto</a>
+                    <a class="nav-link" href="{{ url_for('eliminarproducto') }}">Eliminar Producto</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="buscar-producto.html">Buscar Producto</a>
+                    <a class="nav-link" href="{{ url_for('buscarproducto') }}">Buscar Producto</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="registrar_usuario.html">Registrar Usuario</a>
+                    <a class="nav-link" href="{{ url_for('registrarusuario') }}">Registrar Usuario</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Salir</a>
+                    <a class="nav-link" href="{{ url_for('login') }}">Salir</a>
                 </li>
             </ul>
             Administardor
         </div>
     </nav>
     <div class="container">
-        <img src="img/Administración-de-inventarios.jpg" class="center">
+        <img src="{{ url_for('static', filename='img/Administración-de-inventarios.jpg')}}" class="center">
     </div>
 </body>
 
