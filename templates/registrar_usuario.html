@@ -1,17 +1,29 @@
 {% extends "_layout.html" %}
 
 {% block contenido %}
-<h1>Registrarse</h1>
-
-<form name="formulario" method="post" action="" onsubmit="return validar_form_registrar_usuario()">
-  <label for="usuario">Usuario</label>
-  <input name="usuario" id="usuario" >
-  <label for="email">Correo Electronico</label>
-  <input name="email" id="email" >
-  <label for="password">Contraseña</label>
-  <input type="password" name="password" id="password" >
-  <img src="{{ url_for('static', filename='images/show_pwd.png') }}" onmouseover="mostrarPassword();" onmouseout="ocultarPassword();" />
-  <input type="submit" value="Registrarse">
-</form>
+    {% from "_formhelpers.html" import render_field %}
+    <h1>Registrar Nuevo Usuario</h1>
+    <div class="px-2">
+        <form class="border border-primary" action="" method="post" novalidate>
+            <div class="form-group col">
+                {{ form.hidden_tag() }}
+                <dl>
+                    {{ render_field(form.usuario) }}
+                    {{ render_field(form.password) }}
+                    {{ render_field(form.confirm) }}
+                    {{ render_field(form.email) }}
+                    {{ render_field(form.rol) }}
+                </dl>
+                <p>{{ form.enviar() }}</p>
+            </div>
+        </form>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="text-warning"> {{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
 
 {% endblock %}

@@ -1,6 +1,7 @@
 import sqlite3
 from sqlite3 import Error
 from systemdb import sql_connection
+from werkzeug import security
 
 
 def listar_usuarios():
@@ -24,11 +25,13 @@ def usuario_by_username(username):
 
 
 def agregar_usuario(username, password, email, rol):
-    strsql = "INSERT INTO usuarios VALUES (?, ?, ?, ?)"
+    strsql = "INSERT INTO usuarios ('username', 'password', 'email', 'rol') VALUES (?, ?, ?, ?)"
     con = sql_connection()
     cursor = con.cursor()
     password_hash = security.generate_password_hash(password)
-    cursor.execute(strsql, (username, password_hash, email, rol))
-    cursor.commit()
+    print(strsql)
+    print(username, password, email, rol)
+    cursor.execute(strsql, [username, password_hash, email, rol])
+    con.commit()
     con.close()
 
