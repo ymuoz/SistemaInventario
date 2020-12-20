@@ -1,14 +1,22 @@
 {% extends "_layout.html" %}
 
 {% block contenido %}
-{% with mensajes = get_flashed_messages() %}
-{% if mensajes %}
-<ul>
-    {% for mensaje in mensajes %}
-    <li>{{ mensaje }}</li>
-    {% endfor %}
-</ul>
-
-{% endif %}
-{% endwith %}
+    <div class="container-fluid">
+                <h1 class="display-3">Sistema de Inventario</h1>
+                <h1 class="text-center">Grupo 3 - Subgrupo R</h1>
+                <br>
+                <h2 class="text-center">Carmen Cecilia Quintero Hernandez</h2>
+                <h2 class="text-center">Paula Daniela Castro Parra </h2>
+                <h2 class="text-center">Cristian Camilo Celis Alean</h2>
+                <h2 class="text-center">Yarhoslav Muñoz Espinosa</h2>
+    </div>
+    {% with mensajes = get_flashed_messages() %}
+        {% if mensajes %}
+            <ul>
+                {% for mensaje in mensajes %}
+                    <li>{{ mensaje }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 {% endblock %}
