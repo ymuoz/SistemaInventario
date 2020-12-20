@@ -1,59 +1,56 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, render_template, url_for, flash, redirect, session
+from systemdb import init_db
+from forms import formulario_login
+from werkzeug import security
+from usuarios_service import usuario_by_username
 
-app = Flask(__name__, template_folder="front-end")
+app = Flask(__name__)
+init_db()
+app.config.update(SECRET_KEY="GRUPO3-R")
+
+rutas_admin = [["/", "Inicio"], ["/logout", "Salir"]]
+rutas_no_user = [["/login", "Login"]]
+
 
 @app.route("/")
-def home():
-    return render_template('menu-general.html')
+def index():
+    if "rol" in session:
+        session["rutas"] = rutas_admin
+    else:
+        session["rutas"] = rutas_no_user
+    return render_template("index.html")
 
-@app.route("/login", methods=['GET', 'POST'])
+
+@app.route("/login", methods=("GET", "POST"))
 def login():
-    error = None
-    if request.method == 'POST':
-        username = request.form['userid']
-        password = request.form['password']
-        if username != 'admin' or password != 'secret':
-            error = 'usuario y/o password inválidos.'
+    if "rol" in session:
+        return redirect(url_for("index"))
+
+    form = formulario_login()
+
+    if form.validate_on_submit():
+        username = form.usuario.data
+        password = form.password.data
+        usuariodb = usuario_by_username(username)
+        if (usuariodb is not None) and (security.check_password_hash(usuariodb[1], password)):
+            session["rol"] = usuariodb[3]
+            session["rutas"] = rutas_admin
+            return redirect(url_for("index"))
         else:
-            return redirect(url_for('home'))
+            session["rutas"] = rutas_no_user
+            flash("Usuario o contraseña incorrectos")
 
-    return render_template('login_adm.html', error=error)
+    return render_template("login.html", form=form)
 
-@app.route("/crearproducto", methods=['GET', 'POST'])
-def crearproducto():
-    error = None
-    if request.method == 'POST':
-        nombre = request.form['nombre']
-        ref = request.form['ref']
-        cantidad = request.form['cantidad']
-        precio = request.form['precio']
 
-        if nombre == '' or ref == '' or cantidad == '' or precio=='':
-            error = 'datos no válidos.'
-        else:
-            return redirect(url_for('home'))
+@app.route("/logout", methods=("GET", "POST"))
+def logout():
+    if "rol" in session:
+        session.pop("rol", None)
+        session["rutas"] = rutas_no_user
+        return redirect(url_for("index"))
+    return redirect(url_for("login"))
 
-    return render_template('crear-producto.html', error=error)
 
-@app.route("/modificarproducto", methods=['GET', 'POST'])
-def modificarproducto():
-    return render_template('crear-producto.html')
-
-@app.route("/eliminarproducto", methods=['GET', 'POST'])
-def eliminarproducto():
-    return render_template('crear-producto.html')
-
-@app.route("/registrarusuario", methods=['GET', 'POST'])
-def registrarusuario():
-    return render_template('registrar_usuario.html')
-
-@app.route("/actualizarinventario", methods=['GET', 'POST'])
-def actualizarinventario():
-    return render_template('actualizar-inventario.html')
-
-@app.route("/buscarproducto", methods=['GET', 'POST'])
-def buscarproducto():
-    return render_template('buscar-producto.html')
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)
