@@ -1,8 +1,9 @@
 from flask import Flask, render_template, url_for, flash, redirect, session
 from systemdb import init_db
-from forms import FormularioLogin, FormularioRegistrarUsuario
+from forms import FormularioLogin, FormularioRegistrarUsuario, FormularioEditarProducto
 from werkzeug import security
-from usuarios_service import usuario_by_username, agregar_usuario
+from usuarios_service import db_usuario_by_username, db_agregar_usuario
+from productos_service import db_producto_by_ref, db_agregar_producto
 
 app = Flask(__name__)
 init_db()
@@ -11,7 +12,7 @@ app.config.update(SECRET_KEY="GRUPO3-R")
 rutas_admin = [
     ["/", "Inicio"],
     ["/registrar_usuario", "Registrar Usuario"],
-    ["/buscar_producto", "Buscar Producto"],
+    ["/agregar_producto", "Agregar Producto"],
     ["/logout", "Salir"]
 ]
 rutas_vendedor = [
@@ -93,6 +94,36 @@ def registrar_usuario():
             flash("Usuario ya existe.  No se puede agregar un duplicado.")
 
     return render_template("registrar_usuario.html", form=form)
+
+
+@app.route("/agregar_producto", methods=("GET", "POST"))
+def agregar_producto():
+    if ("rol" not in session):
+        return redirect(url_for("login"))
+    else:
+        rol = session["rol"]
+        if (rol != "admin"):
+            flash("Error.  No está autorizado para agregar un producto.")
+            return redirect(url_for("index"))
+
+    form = FormularioEditarProducto()
+
+    if form.validate_on_submit():
+        ref = form.ref.data
+        nombre = form.nombre.data
+        precio = form.precio.data
+        cantidad = form.cantidad.data
+        imagen = form.imagen.data
+
+        productodb = db_producto_by_ref(ref)
+        if (productodb is None):
+            db_agregar_producto(ref, nombre, precio, cantidad, imagen)
+            flash("Producto agregado con éxito.")
+        else:
+            flash("Producto ya existe.  No se puede agregar un duplicado.")
+
+    return render_template("agregar_producto.html", form=form)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

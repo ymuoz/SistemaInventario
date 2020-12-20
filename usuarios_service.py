@@ -1,10 +1,8 @@
-import sqlite3
-from sqlite3 import Error
-from systemdb import sql_connection
 from werkzeug import security
+from systemdb import sql_connection
 
 
-def listar_usuarios():
+def db_listar_usuarios():
     strsql = "SELECT * FROM usuarios;"
     con = sql_connection()
     cursor = con.cursor()
@@ -14,7 +12,7 @@ def listar_usuarios():
     return usuarios
 
 
-def usuario_by_username(username):
+def db_usuario_by_username(username):
     strsql = "SELECT * FROM usuarios WHERE username = ?"
     con = sql_connection()
     cursor = con.cursor()
@@ -24,13 +22,11 @@ def usuario_by_username(username):
     return usuario
 
 
-def agregar_usuario(username, password, email, rol):
+def db_agregar_usuario(username, password, email, rol):
     strsql = "INSERT INTO usuarios ('username', 'password', 'email', 'rol') VALUES (?, ?, ?, ?)"
     con = sql_connection()
     cursor = con.cursor()
     password_hash = security.generate_password_hash(password)
-    print(strsql)
-    print(username, password, email, rol)
     cursor.execute(strsql, [username, password_hash, email, rol])
     con.commit()
     con.close()
