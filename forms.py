@@ -25,3 +25,9 @@ class FormularioEditarProducto(FlaskForm):
     cantidad = IntegerField('Cantidad', validators=[NumberRange(min=0, message="Debe ser mayor o igual a cero")])
     imagen = StringField('Imagen')
     enviar = SubmitField('Agregar')
+
+
+class FormularioBuscarProducto(FlaskForm):
+    buscar = StringField('Palabra clave')
+    enviar = SubmitField('Buscar')
+

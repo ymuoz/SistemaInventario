@@ -1,9 +1,9 @@
-from flask import Flask, render_template, url_for, flash, redirect, session
+from flask import Flask, render_template, url_for, flash, redirect, session, request
 from systemdb import init_db
-from forms import FormularioLogin, FormularioRegistrarUsuario, FormularioEditarProducto
+from forms import FormularioLogin, FormularioRegistrarUsuario, FormularioEditarProducto, FormularioBuscarProducto
 from werkzeug import security
 from usuarios_service import db_usuario_by_username, db_agregar_usuario
-from productos_service import db_producto_by_ref, db_agregar_producto
+from productos_service import db_producto_by_ref, db_agregar_producto, db_producto_by_text, db_listar_productos
 
 app = Flask(__name__)
 init_db()
@@ -13,6 +13,7 @@ rutas_admin = [
     ["/", "Inicio"],
     ["/registrar_usuario", "Registrar Usuario"],
     ["/agregar_producto", "Agregar Producto"],
+    ["/buscar_producto", "Buscar Producto"],
     ["/logout", "Salir"]
 ]
 rutas_vendedor = [
@@ -47,7 +48,7 @@ def login():
     if form.validate_on_submit():
         username = form.usuario.data
         password = form.password.data
-        usuariodb = usuario_by_username(username)
+        usuariodb = db_usuario_by_username(username)
         if (usuariodb is not None) and (security.check_password_hash(usuariodb[1], password)):
             session["rol"] = usuariodb[3]
             session["rutas"] = rutas_admin
@@ -123,6 +124,24 @@ def agregar_producto():
             flash("Producto ya existe.  No se puede agregar un duplicado.")
 
     return render_template("agregar_producto.html", form=form)
+
+
+@app.route("/buscar_producto", methods=("GET", "POST"))
+def buscar_producto():
+    if ("rol" not in session):
+        return redirect(url_for("login"))
+
+    form = FormularioBuscarProducto()
+
+    if (request.method == "GET"):
+        productosdb = db_listar_productos()
+    elif form.validate_on_submit():
+        palabra = form.buscar.data
+        productosdb = db_producto_by_text(palabra)
+        if (productosdb is None):
+            flash("No se encuentra ningún producto con esa palabra.")
+
+    return render_template("buscar_producto.html", form=form, productos=productosdb)
 
 
 if __name__ == '__main__':
