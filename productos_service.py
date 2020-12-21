@@ -47,3 +47,13 @@ def db_eliminar_producto(referencia):
     con.commit()
     con.close()
 
+
+def db_producto_by_text(text):
+    strsql = "SELECT ref, nombre, precio, cantidad, imagen FROM productos WHERE nombre like ?"
+    con = sql_connection()
+    cursor = con.cursor()
+    cursor.execute(strsql, ["%" + text + "%"])
+    productos = cursor.fetchall()
+    con.close()
+    return productos
+
