@@ -1,0 +1,41 @@
+{% extends "_layout.html" %}
+
+{% block contenido %}
+    <h1>Editar Producto Ref: {{ form.ref.data }}</h1>
+    <div class="px-2">
+        <form class="border border-primary" action="" method="post" novalidate>
+            <div class="form-group col">
+                {{ form.hidden_tag() }}
+                <dl>
+                    <input id="ref" name="ref" required="" type="text" value="{{ form.ref.data }}" hidden>
+                    {% if session['rol'] == 'admin' %}
+                        <dt>{{ form.nombre.label }}</dt>
+                        <dd>{{ form.nombre }}</dd>
+                        <dt>{{ form.precio.label }}</dt>
+                        <dd>{{ form.precio }}</dd>
+                        <dt>{{ form.imagen.label }}</dt>
+                        <dd>{{ form.imagen }}</dd>
+                    {% else %}
+                        <input id="nombre" name="nombre" required="" type="text" value="{{ form.nombre.data }}" hidden>
+                        <input id="precio" name="precio" required="" type="text" value="{{ form.precio.data }}" hidden>
+                        <input id="imagen" name="imagen" type="text" value="{{ form.imagen.data }}" hidden>
+                    {% endif %}
+                    <dt xmlns="http://www.w3.org/1999/html"><label for="cantidad">Cantidad</label>
+                    </dt>
+                    <dd>
+                        <input id="cantidad" name="cantidad" type="text" value="{{ form.cantidad.data }}">
+                    </dd>
+                </dl>
+                <p><input id="enviar" name="enviar" type="submit" value="Grabar"></p>
+            </div>
+        </form>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="text-warning"> {{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+{% endblock %}

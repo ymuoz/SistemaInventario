@@ -23,7 +23,7 @@ def init_db():
     CREATE TABLE IF NOT EXISTS productos (
         ref TEXT,
         nombre  TEXT,
-        precio  REAL,
+        precio  INTEGER,
         cantidad    INTEGER,
         imagen  TEXT
     );
